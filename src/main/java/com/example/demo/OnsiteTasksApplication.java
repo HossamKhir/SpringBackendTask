@@ -3,6 +3,8 @@ package com.example.demo;
 import java.awt.Color;
 import java.sql.Date;
 
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -42,6 +44,7 @@ public class OnsiteTasksApplication {
 		CommandLineRunner cmd = new CommandLineRunner() {
 
 			@Override
+			@Transactional
 			public void run(String... args) throws Exception {
 				// TODO Auto-generated method stub
 
@@ -66,8 +69,14 @@ public class OnsiteTasksApplication {
 
 				log.info("findByOwner");
 				log.info(repo.findByOwner("Jack").toString());
+
+//				@Transactional
+				log.info("" + repo.deleteByOwner("Jack"));
 				
-				repo.deleteAll();
+				log.info("delete done");
+				
+				
+
 			}
 		};
 

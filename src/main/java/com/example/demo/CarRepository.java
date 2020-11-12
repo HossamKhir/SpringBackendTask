@@ -41,5 +41,12 @@ public interface CarRepository extends CrudRepository<Car, Long> {
 	 * @return
 	 */
 	List<Car> findByColour(Color colour);
+	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	long deleteByOwner(String owner);
 
 }
