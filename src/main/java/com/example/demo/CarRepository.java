@@ -12,7 +12,7 @@ public interface CarRepository extends CrudRepository<Car, Long> {
 	 * @param owner
 	 * @return
 	 */
-	Car findByOwner(String owner);
+	Car findByOwner(Person owner);
 
 	/**
 	 * 

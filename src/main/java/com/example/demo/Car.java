@@ -32,10 +32,10 @@ public class Car {
 	 * fixed through:
 	 * https://stackoverflow.com/questions/3774198/org-hibernate-mappingexception-could-not-determine-type-for-java-util-list-at
 	 */
-//	@OneToOne(targetEntity = Person.class)
-//	private Person owner;
+	@OneToOne(targetEntity = Person.class)
+	private Person owner;
 	// FIXME
-	private String owner;
+//	private String owner;
 	@JsonIgnore
 	private boolean hideMe;
 
@@ -54,7 +54,7 @@ public class Car {
 	 * @param owner
 	 * @param hideMe
 	 */
-	public Car(String name, Color colour, String model, String owner, boolean hideMe) {
+	public Car(String name, Color colour, String model, Person owner, boolean hideMe) {
 		super();
 		this.name = name;
 		this.colour = colour;
@@ -107,7 +107,7 @@ public class Car {
 	 * 
 	 * @return
 	 */
-	public String getOwner() {
+	public Person getOwner() {
 		return owner;
 	}
 

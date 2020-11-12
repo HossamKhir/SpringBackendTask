@@ -25,52 +25,55 @@ public class OnsiteTasksApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(OnsiteTasksApplication.class);
-//		ConfigurableApplicationContext confAppContext = SpringApplication.run(OnsiteTasksApplication.class, args);
-//		Car car = confAppContext.getBean(Car.class);
-//		System.out.println(car);
 	}
 
 	@Bean
-	public CommandLineRunner test(PersonRepository repo) {
-		return (args) -> {
-			repo.save(new Person("Jack", "Bauer", Date.valueOf("1975-06-02")));
-		};
-	}
-
-	@Bean
-	public CommandLineRunner demo(CarRepository repo) {
+	public CommandLineRunner demo(PersonRepository personRepo, CarRepository carRepo) {
 		CommandLineRunner cmd = new CommandLineRunner() {
 
 			@Override
 			public void run(String... args) throws Exception {
 				// TODO Auto-generated method stub
+				personRepo.save(new Person("Jack", "Bauer", Date.valueOf("1975-06-02")));
+				personRepo.save(new Person("Jason", "Bourne", Date.valueOf("1970-09-25")));
+				personRepo.save(new Person("James", "Bond", Date.valueOf("1948-11-06")));
+				personRepo.save(new Person("John", "Wick", Date.valueOf("1982-02-01")));
+				personRepo.save(new Person("Hossam", "Khairullah", Date.valueOf("1995-05-02")));
 
-//				Person jackBauer = new Person("Jack", "Bauer", Date.valueOf("1975-06-02"));
-				Car mazda = new Car("MAZDA", Color.BLACK, "MX-5", "Jack", false);
-				repo.save(mazda);
-				log.info("findAll");
-				for (Car car : repo.findAll()) {
+				carRepo.save(
+						new Car("BUGATTI", Color.white, "Chiron", personRepo.findBySurname("Bauer").get(0), false));
+				carRepo.save(
+						new Car("HONDA", Color.cyan, "NSX 1991", personRepo.findByFirstName("Jason").get(0), false));
+				carRepo.save(new Car("VOLKSWAGEN", Color.red, "Beetle", personRepo.findBySurname("Khairullah").get(0),
+						true));
+				carRepo.save(new Car("ASTON MARTIN", Color.gray, "DB11", personRepo.findById(3L).get(0), false));
+				carRepo.save(new Car("FORD", Color.blue, "Shelby Mustang 2013", personRepo.findBySurname("Wick").get(0),
+						false));
+
+				log.info("test-->");
+				log.info("findById");
+				log.info(carRepo.findById(2L).toString());
+
+				log.info("findByName");
+				for (Car car : carRepo.findByName("FORD")) {
 					log.info(car.toString());
 				}
-				log.info("___");
 
-//				log.info("findById");
-//				log.info(repo.findById(1L).toString());
-//				log.info("___");
-
-				log.info("findByColour");
-				for (Car car : repo.findByColour(Color.BLACK)) {
+				log.info("findByColor");
+				for (Car car : carRepo.findByColour(Color.red)) {
 					log.info(car.toString());
 				}
-				log.info("___");
+
+				log.info("findByModel");
+				for (Car car : carRepo.findByModel("DB11")) {
+					log.info(car.toString());
+				}
 
 				log.info("findByOwner");
-				log.info(repo.findByOwner("Jack").toString());
-				
-				repo.deleteAll();
+				log.info(carRepo.findByOwner(personRepo.findBySurname("Bourne").get(0)).toString());
+
 			}
 		};
-
 		return cmd;
 	}
 
