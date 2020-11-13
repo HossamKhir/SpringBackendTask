@@ -57,9 +57,9 @@ public class OnsiteTasksApplication {
 				}
 				log.info("___");
 
-//				log.info("findById");
-//				log.info(repo.findById(1L).toString());
-//				log.info("___");
+				log.info("findById");
+				log.info(repo.findById(2L).get().toString());
+				log.info("___");
 
 				log.info("findByColour");
 				for (Car car : repo.findByColour(Color.BLACK)) {
@@ -70,14 +70,40 @@ public class OnsiteTasksApplication {
 				log.info("findByOwner");
 				log.info(repo.findByOwner("Jack").toString());
 
-//				@Transactional
 				log.info("" + repo.deleteByOwner("Jack"));
-				
+
 				log.info("delete done");
-				
-				
 
 			}
+		};
+
+		cmd = new CommandLineRunner() {
+
+			@Override
+			public void run(String... args) throws Exception {
+				// TODO Auto-generated method stub
+				CarService cService = new CarService();
+				cService.setRepo(repo);
+
+				log.info("adding a car");
+				
+				cService.addCar("name", Color.yellow, "modle", "owner", false);
+				
+				log.info("retrieving cars");
+				
+				for (Car car : cService.getRepo().findAll()) {
+					log.info(car.toString());
+				}
+				
+				log.info("updating a car");
+				
+				cService.updateCarColour(2L, Color.red);
+				
+				for (Car car : cService.getRepo().findByColour(Color.red)) {
+					log.info(car.toString());
+				}
+			}
+
 		};
 
 		return cmd;

@@ -33,7 +33,7 @@ public interface CarRepository extends CrudRepository<Car, Long> {
 	 * @param id
 	 * @return
 	 */
-	Car findById(long id);
+//	Car findById(long id);
 
 	/**
 	 * 

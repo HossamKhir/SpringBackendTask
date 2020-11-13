@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 import org.springframework.stereotype.Component;
 
@@ -115,6 +114,26 @@ public class Car {
 	public String toString() {
 		return "Car [id=" + id + ", name=" + name + ", colour=" + colour + ", model=" + model + ", owner=" + owner
 				+ "]";
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setColour(Color colour) {
+		this.colour = colour;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+
+	public void setHideMe(boolean hideMe) {
+		this.hideMe = hideMe;
 	}
 
 }
