@@ -4,7 +4,9 @@ import java.awt.Color;
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CarRepository extends CrudRepository<Car, Long> {
 
 	/**
@@ -41,12 +43,14 @@ public interface CarRepository extends CrudRepository<Car, Long> {
 	 * @return
 	 */
 	List<Car> findByColour(Color colour);
-	
+
 	/**
 	 * 
 	 * @param id
 	 * @return
 	 */
 	long deleteByOwner(String owner);
+
+	List<Car> findByNameAndOwner(String name, String owner);
 
 }

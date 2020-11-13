@@ -36,6 +36,7 @@ public class OnsiteTasksApplication {
 	public CommandLineRunner test(PersonRepository repo) {
 		return (args) -> {
 			repo.save(new Person("Jack", "Bauer", Date.valueOf("1975-06-02")));
+			repo.save(new Person("Jack", "Ryan", Date.valueOf("1982-09-06")));
 		};
 	}
 
@@ -51,15 +52,16 @@ public class OnsiteTasksApplication {
 //				Person jackBauer = new Person("Jack", "Bauer", Date.valueOf("1975-06-02"));
 				Car mazda = new Car("MAZDA", Color.BLACK, "MX-5", "Jack", false);
 				repo.save(mazda);
+				repo.save(new Car("MAZDA", Color.yellow, "Mazda-3", "Ryan", true));
 				log.info("findAll");
 				for (Car car : repo.findAll()) {
 					log.info(car.toString());
 				}
 				log.info("___");
 
-				log.info("findById");
-				log.info(repo.findById(2L).get().toString());
-				log.info("___");
+//				log.info("findById");
+//				log.info(repo.findById(2L).get().toString());
+//				log.info("___");
 
 				log.info("findByColour");
 				for (Car car : repo.findByColour(Color.BLACK)) {
@@ -70,6 +72,11 @@ public class OnsiteTasksApplication {
 				log.info("findByOwner");
 				log.info(repo.findByOwner("Jack").toString());
 
+				log.info("findByNameAndOwner");
+				for (Car car : repo.findByNameAndOwner("MAZDA", "Jack")) {
+					log.info(car.toString());
+				}
+
 				log.info("" + repo.deleteByOwner("Jack"));
 
 				log.info("delete done");
@@ -77,7 +84,8 @@ public class OnsiteTasksApplication {
 			}
 		};
 
-		cmd = new CommandLineRunner() {
+//		cmd =
+		new CommandLineRunner() {
 
 			@Override
 			public void run(String... args) throws Exception {
@@ -86,19 +94,19 @@ public class OnsiteTasksApplication {
 				cService.setRepo(repo);
 
 				log.info("adding a car");
-				
+
 				cService.addCar("name", Color.yellow, "modle", "owner", false);
-				
+
 				log.info("retrieving cars");
-				
+
 				for (Car car : cService.getRepo().findAll()) {
 					log.info(car.toString());
 				}
-				
+
 				log.info("updating a car");
-				
+
 				cService.updateCarColour(2L, Color.red);
-				
+
 				for (Car car : cService.getRepo().findByColour(Color.red)) {
 					log.info(car.toString());
 				}
