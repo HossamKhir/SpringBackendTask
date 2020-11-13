@@ -52,7 +52,7 @@ public class OnsiteTasksApplication {
 
 				log.info("test-->");
 				log.info("findById");
-				log.info(carRepo.findById(2L).toString());
+				log.info(carRepo.findById(2L).get().toString());
 
 				log.info("findByName");
 				for (Car car : carRepo.findByName("FORD")) {

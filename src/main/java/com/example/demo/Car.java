@@ -8,8 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import org.springframework.stereotype.Component;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
@@ -18,7 +16,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *
  */
 @Entity
-@Component
 public class Car {
 
 	@Id
@@ -31,7 +28,11 @@ public class Car {
 	/**
 	 * fixed through:
 	 * https://stackoverflow.com/questions/3774198/org-hibernate-mappingexception-could-not-determine-type-for-java-util-list-at
+	 * 
+	 * check also: https://www.baeldung.com/jpa-one-to-one
 	 */
+//	@OneToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "personId", referencedColumnName = "id")
 	@OneToOne(targetEntity = Person.class)
 	private Person owner;
 	// FIXME
@@ -54,11 +55,13 @@ public class Car {
 	 * @param owner
 	 * @param hideMe
 	 */
+//	public Car(String name, Color colour, String model, long ownerId, boolean hideMe) {
 	public Car(String name, Color colour, String model, Person owner, boolean hideMe) {
 		super();
 		this.name = name;
 		this.colour = colour;
 		this.model = model;
+		// this.ownerId = ownerId;
 		this.owner = owner;
 		this.hideMe = hideMe;
 	}

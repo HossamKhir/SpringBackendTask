@@ -7,14 +7,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.springframework.stereotype.Component;
-
 /**
  * 
  * @author khair
  *
  */
-@Component
 @Entity
 public class Person {
 
@@ -25,6 +22,10 @@ public class Person {
 	private String firstName;
 	private String surname;
 	private Date dateOfBirth;
+	
+	// FIXME
+//	@OneToOne(mappedBy = "owner")
+//	private Car car;
 
 	public Person() {
 		// TODO Auto-generated constructor stub

@@ -75,7 +75,8 @@ public class CarService {
 	 */
 	public void updateCarOwner(long id, Person owner) {
 		Car car = repo.findById(id).get();
-		car.setOwner(owner);
+//		car.setOwner(owner);
+//		car.setOwnerId(owner.getId());
 		repo.save(car);
 	}
 
