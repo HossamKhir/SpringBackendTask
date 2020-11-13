@@ -117,4 +117,44 @@ public class Car {
 				+ "]";
 	}
 
+	/**
+	 * 
+	 * @param name
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * 
+	 * @param colour
+	 */
+	public void setColour(Color colour) {
+		this.colour = colour;
+	}
+
+	/**
+	 * 
+	 * @param model
+	 */
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	/**
+	 * 
+	 * @param owner
+	 */
+	public void setOwner(Person owner) {
+		this.owner = owner;
+	}
+
+	/**
+	 * 
+	 * @param hideMe
+	 */
+	public void setHideMe(boolean hideMe) {
+		this.hideMe = hideMe;
+	}
+
 }
